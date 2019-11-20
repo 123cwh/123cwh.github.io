@@ -256,7 +256,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-20 21:26:03" itemprop="dateModified" datetime="2019-11-20T21:26:03+08:00">2019-11-20</time>
+                <time title="修改时间：2019-11-21 00:55:52" itemprop="dateModified" datetime="2019-11-21T00:55:52+08:00">2019-11-21</time>
               </span>
 
           
@@ -271,16 +271,55 @@
 
       
           <hr>
-<p>title: C++基本语法</p>
-<h2 id="处理数据"><a href="#处理数据" class="headerlink" title="处理数据"></a>处理数据</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>整型分为int，long int,unsigned int</p>
-<p>###字符型<br>‘A’的ASCLL码65<br>‘a’的ANSLL码97<br>‘’的ASCLL码32<br>‘！’的ASCLL码33</p>
-<h3 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h3><p>E/e代表以10为底</p>
-<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><p>和C的运算符以及运算优先级一样<br>###强制转换<br>往更高的精度转换</p>
-<blockquote>
-<blockquote>
-<p>short转换为int<br>###初始化<br>   从C11开始支持{}形式的初始化<br>   可以省略“=”<br>   数组的初始化：禁止缩窄转换<br>###</p>
-</blockquote>
-</blockquote>
+<p>title:排序<br>#冒泡排序<br>&lt;其基本思想是两两交换，如果反序则交换&gt;<br>&lt;&lt;（’’’)<br>       #include<iostream><br>using namespace std;</p>
+<p>void swap1(int *left, int *right)<br>{<br>    int temp = *left;<br>    *left = *right;<br>    *right = temp;<br>}</p>
+<p>void swap2(int &amp;left, int &amp;right)<br>{<br>    int temp = left;<br>    left = right;<br>    right = left;<br>}</p>
+<p>void swap3(int &amp;left, int &amp;right)<br>{<br>    if (&amp;left != &amp;right)<br>    {<br>        left ^= right;<br>        right ^= left;<br>        left ^= right;<br>    }<br>}<br>(‘’’)<br>其改进思想为<br>（’’’)<br>     void Bubblesort1(int arr[],int sum)<br>     {<br>         int i,j;<br>         for(i=0;i&lt;num;i++)<br>         {<br>             for(j=1j&lt;num-i;j++)<br>             {<br>                 if(arr[j-1]&gt;arr[j])<br>                 swap1(&amp;arr[j-1],&amp;arrr[j]);<br>             }<br>         }</p>
+<pre><code>}</code></pre><p>(‘’’)<br>改进思路：设置标记，如果那一次没有发生交换，说明排序已经完成；<br>（void BubbleSort2(int arr[], int num)<br>{<br>    int k = num;<br>    int j;<br>    bool flag = true;<br>    while (flag)<br>    {<br>        flag = false;<br>        for (j = 1; j &lt; k; j++)<br>        {<br>            if (arr[j - 1] &gt; arr[j])<br>            {<br>                swap1(&amp;arr[j - 1], &amp;arr[j]);<br>                flag = true;<br>            }<br>        }<br>        k–;<br>    }<br>}<br>(‘’’)<br>#插入排序<br>插入排序: 将一个记录插入到已经排好序的有序表中<br>（’’’)<br>void InsertionSort(int arr[], int num)<br>{<br>    int temp;<br>    int i, j;<br>    for (i = 1; i &lt; num; i++)<br>    {<br>        temp = arr[i];<br>        for (j = i; j &gt; 0 &amp;&amp; arr[j - 1] &gt; temp; j–)<br>            arr[j] = arr[j - 1];<br>        arr[j] = temp;<br>    }<br>}<br>(‘’’)<br>#希尔排序<br>先将整个待排元素序列分成若干子序列（有固定增量），先将这些子序列进行直接插入排序，然后缩小增量，直至增量为1.<br>(‘’’)<br>void ShellSort(int *arr, int N)<br>{<br>    int i, j, increment;<br>    int tmp;<br>    for (increment = N / 2; increment &gt; 0; increment /= 2)<br>    {<br>        for (i = increment; i &lt; N; i++)<br>        {<br>            tmp = arr[i];<br>            for (j = i; j &gt;= increment; j -= increment)<br>            {<br>                if (arr[j - increment] &gt; tmp)<br>                    arr[j] = arr[j - increment];<br>                else<br>                    break;<br>            }<br>            arr[j] = tmp;<br>        }</p>
+<pre><code>}</code></pre><p>}<br>(‘’’)<br>#简单选择排序<br>通过n-i次关键字之间的比较,从n-i+1<br>个记录中选择关键字最小的记录,并和第i(1&lt;=i&lt;=n)个记录交换<br> （’’’)<br> void Selectsort(int arr[],int num)<br> {<br>     int i,j,Mindex;<br>     for(i=0;i&lt;num;i++)<br>     {<br>         Mindex=i;<br>         for(j=i+1;j&lt;num;j++)<br>         {<br>             if(arr[j]&lt;arrr[Mindex])<br>             Mindex=j;</p>
+<pre><code>    }
+    swap1(&amp;arr[i],&amp;arr[Mindex])
+}</code></pre><p> }<br>#归并排序<br>假设初始序列含有n个记录,则可以看成n个有序的子序列,每个子序列的长度为1,然后<br>两两归并,得到(不小于n/2的最小整数)个长度为2或1的有序子序列,再两两归并,…<br>如此重复,直至得到一个长度为n的有序序列为止<br>(‘’’)<br>void merge(int a[], int tmp_array[], int lpos, int rpos, int rightn)<br>{<br>    int i, leftn, num_elements, tmpos;</p>
+<pre><code>leftn = rpos - 1;
+tmpos = lpos;
+num_elements = rightn - lpos + 1;
+
+/*main loop*/
+while (lpos &lt;= leftn &amp;&amp; rpos &lt;= rightn)
+    if (a[lpos] &lt;= a[rpos])
+        tmp_array[tmpos++] = a[lpos++];
+    else
+        tmp_array[tmpos++] = a[rpos++];
+
+while (lpos &lt;= leftn) /*copy rest of the first part*/
+    tmp_array[tmpos++] = a[lpos++];
+while (rpos &lt;= rightn) /*copy rest of the second part*/
+    tmp_array[tmpos++] = a[rpos++];
+
+/*copy array back*/
+for (i = 0; i &lt; num_elements; i++, rightn--)
+    a[rightn] = tmp_array[rightn];</code></pre><p>}</p>
+<p>void msort(int a[], int tmp_array[], int left, int right)<br>{<br>    int center;</p>
+<pre><code>if (left &lt; right)
+{
+    center = (right + left) / 2;
+    msort(a, tmp_array, left, center);
+    msort(a, tmp_array, center + 1, right);
+    merge(a, tmp_array, left, center + 1, right);
+}</code></pre><p>}</p>
+<p>void merge_sort(int a[], int n)<br>{<br>    int *tmp_array;<br>    tmp_array = (int *)malloc(n * sizeof(int));</p>
+<pre><code>if (tmp_array != NULL)
+{
+    msort(a, tmp_array, 0, n - 1);
+    free(tmp_array);
+}
+
+else
+    printf(&quot;No space for tmp array!\n&quot;);</code></pre><p>}<br>(‘’’)<br>#堆<br>堆排序就是利用堆进行排序的方法.基本思想是:将待排序的序列构造成一个大顶堆.此时,整个序列的最大值就是堆顶<br>的根结点.将它移走(其实就是将其与堆数组的末尾元素交换, 此时末尾元素就是最大值),然后将剩余的n-1个序列重新<br>构造成一个堆,这样就会得到n个元素的次大值.如此反复执行,便能得到一个有序<br>（’’’)<br>#define leftChild(i) (2*(i) + 1)</p>
+<p>void percDown(int *arr, int i, int N)<br>{<br>    int tmp, child;<br>    for (tmp = arr[i]; leftChild(i) &lt; N; i = child)<br>    {<br>        child = leftChild(i);<br>        if (child != N - 1 &amp;&amp; arr[child + 1] &gt; arr[child])<br>            child++;<br>        if (arr[child] &gt; tmp)<br>            arr[i] = arr[child];<br>        else<br>            break;<br>    }<br>    arr[i] = tmp;<br>}</p>
+<p>void HeapSort(int *arr, int N)<br>{<br>    int i;<br>    for (i = N / 2; i &gt;= 0; i–)<br>        percDown(arr, i, N);<br>    for (i = N - 1; i &gt; 0; i–)<br>    {<br>        swap1(&amp;arr[0], &amp;arr[i]);<br>        percDown(arr, 0, i);<br>    }<br>}</p>
+<p>int main(void)<br>{<br>    int arr[] = { 9, 2, 5, 8, 3, 4, 7, 1, 6, 10};<br>    HeapSort(arr, 10);<br>    for (int i = 0; i &lt; 10; i++)<br>        cout &lt;&lt; arr[i] &lt;&lt; ‘ ‘;<br>    cout &lt;&lt; endl;</p>
+<pre><code>return 0;</code></pre><p>}<br>(‘’’)<br>      <strong>以上就是排序</strong></p>
 
       
     </div>
